@@ -1,5 +1,443 @@
 <!DOCTYPE html>
-<html>
-<head><title>Tarik</title></head>
-<body><h1>Coming soon</h1></body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarik Zaanani Karzazi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050810;--bg2:#0a0f1e;--bg3:#0f1628;--blue:#2563eb;--blue2:#3b82f6;--blue3:#93c5fd;--text:#e2e8f0;--muted:#64748b;--border:#1e2d4a}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+
+#canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,16,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,99,235,0.15)}
+.nav-logo{font-size:1.2rem;font-weight:700;color:var(--blue2);letter-spacing:2px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--blue3)}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;z-index:1}
+.hero-content{max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);color:var(--blue3);padding:0.5rem 1.25rem;border-radius:50px;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem}
+.dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:clamp(3rem,7vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1rem;letter-spacing:-1px}
+.hero h1 .first{color:var(--text)}
+.hero h1 .last{color:var(--blue2)}
+.hero-role{font-size:1.2rem;color:var(--muted);margin-bottom:3rem;letter-spacing:1px}
+.hero-role span{color:var(--blue3)}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:0.85rem 2rem;border-radius:8px;font-size:0.95rem;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;letter-spacing:0.5px}
+.btn-primary{background:var(--blue);color:white}
+.btn-primary:hover{background:var(--blue2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,99,235,0.3)}
+.btn-outline{background:transparent;color:var(--blue3);border:1px solid rgba(37,99,235,0.4)}
+.btn-outline:hover{border-color:var(--blue2);transform:translateY(-3px);background:rgba(37,99,235,0.05)}
+
+section{position:relative;z-index:1;padding:6rem 2rem;max-width:1000px;margin:0 auto}
+.section-label{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:0.5rem}
+.section-title span{color:var(--blue2)}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--blue),transparent);margin-bottom:3rem;border-radius:2px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-text{color:#94a3b8;line-height:1.9;font-size:1.02rem}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center}
+.stat-num{font-size:2rem;font-weight:700;color:var(--blue2);display:block}
+.stat-label{font-size:0.82rem;color:var(--muted);margin-top:0.25rem}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all 0.3s}
+.skill-card:hover{border-color:rgba(37,99,235,0.5);transform:translateY(-4px)}
+.skill-icon{font-size:1.5rem;margin-bottom:0.75rem}
+.skill-card h3{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue3);margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);color:var(--blue3);padding:0.25rem 0.7rem;border-radius:50px;font-size:0.78rem}
+
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--blue),transparent)}
+.titem{position:relative;padding-bottom:3rem}
+.titem::before{content:'';position:absolute;left:-2.4rem;top:5px;width:10px;height:10px;background:var(--blue);border-radius:50%;border:2px solid var(--bg)}
+.titem:hover .tcard{border-color:rgba(37,99,235,0.5)}
+.tcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:border-color 0.3s}
+.tperiod{font-size:0.78rem;color:var(--blue);letter-spacing:1px;margin-bottom:0.4rem}
+.trole{font-size:1.05rem;font-weight:600;margin-bottom:0.25rem}
+.tcompany{color:var(--muted);font-size:0.88rem;margin-bottom:0.75rem}
+.tdesc{color:#64748b;font-size:0.88rem;line-height:1.7}
+
+.edu-grid{display:grid;gap:1rem}
+.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:all 0.3s}
+.edu-card:hover{border-color:rgba(37,99,235,0.4);transform:translateX(6px)}
+.edu-title{font-weight:600;margin-bottom:0.2rem;font-size:0.95rem}
+.edu-school{color:var(--muted);font-size:0.85rem}
+.edu-year{color:var(--blue3);font-size:0.8rem;white-space:nowrap;text-align:right}
+
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.lang-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;transition:all 0.3s;position:relative;overflow:hidden}
+.lang-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transition:transform 0.3s}
+.lang-card:hover::before{transform:scaleX(1)}
+.lang-card:hover{transform:translateY(-4px)}
+.lang-flag{font-size:2rem;margin-bottom:0.5rem}
+.lang-name{font-weight:600;font-size:0.95rem;margin-bottom:0.25rem}
+.lang-level{color:var(--blue3);font-size:0.8rem}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.project-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-decoration:none;color:var(--text);display:block;transition:all 0.3s;position:relative;overflow:hidden}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue3));transform:scaleX(0);transition:transform 0.3s}
+.project-card:hover::before{transform:scaleX(1)}
+.project-card:hover{border-color:rgba(37,99,235,0.5);transform:translateY(-6px)}
+.project-arrow{position:absolute;top:1.5rem;right:1.5rem;color:var(--muted);font-size:1.2rem;transition:all 0.3s}
+.project-card:hover .project-arrow{color:var(--blue3);transform:translate(3px,-3px)}
+.project-card h3{font-size:1rem;margin-bottom:0.6rem;margin-right:2rem}
+.project-card p{color:var(--muted);font-size:0.85rem;margin-bottom:1.25rem;line-height:1.6}
+.ptags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.ptag{background:rgba(37,99,235,0.08);color:var(--blue3);padding:0.2rem 0.6rem;border-radius:4px;font-size:0.75rem}
+
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-text{color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.contact-links{display:flex;flex-direction:column;gap:0.75rem}
+.contact-link{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;color:var(--text);transition:all 0.3s;font-size:0.9rem}
+.contact-link:hover{border-color:rgba(37,99,235,0.5);transform:translateX(6px)}
+.contact-icon{width:38px;height:38px;background:rgba(37,99,235,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.availability{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:2rem}
+.avail-title{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:1.25rem}
+.avail-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;font-size:0.9rem;color:#94a3b8}
+.avail-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;flex-shrink:0}
+
+footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;border-top:1px solid var(--border)}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .contact-wrapper{grid-template-columns:1fr}
+  .edu-card{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<nav>
+  <div class="nav-logo">TZK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Available · Open to relocation</div>
+    <h1><span class="first">Tarik Zaanani</span><br><span class="last">Karzazi</span></h1>
+    <p class="hero-role">Full-Stack Developer · <span>IT Technician</span> · Multilingual</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-outline">View projects</a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">About <span>Me</span></div>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div>
+      <p class="about-text">IT technician with a Higher Technician degree in Web Application Development and hands-on experience building full-stack web applications. Over 6 years of professional experience in international industrial environments across Switzerland and France — Nestlé, Nespresso, WAGO, Merck — where I built strong problem-solving habits, technical documentation skills and the ability to thrive in multilingual teams.<br><br>Currently seeking a first IT role with immediate availability and openness to relocate worldwide.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><span class="stat-num">6+</span><div class="stat-label">Years experience</div></div>
+      <div class="stat"><span class="stat-num">4</span><div class="stat-label">Languages</div></div>
+      <div class="stat"><span class="stat-num">2</span><div class="stat-label">Countries worked</div></div>
+      <div class="stat"><span class="stat-num">∞</span><div class="stat-label">Motivation</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">What I know</div>
+  <div class="section-title">Technical <span>Skills</span></div>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <h3>Frontend</h3>
+      <div class="tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Angular</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <h3>Backend</h3>
+      <div class="tags">
+        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <h3>Database & Tools</h3>
+      <div class="tags">
+        <span class="tag">MySQL</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">IntelliJ</span><span class="tag">Postman</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔧</div>
+      <h3>Other</h3>
+      <div class="tags">
+        <span class="tag">Scrum</span><span class="tag">ERP Software</span><span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">Technical Docs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">What I've done</div>
+  <div class="section-title">Work <span>Experience</span></div>
+  <div class="divider"></div>
+  <div class="timeline">
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">Sep 2023 – Jan 2024</div>
+        <div class="trole">Full-Stack Web Developer (Internship)</div>
+        <div class="tcompany">Lynxview · Alicante, Spain 🇪🇸</div>
+        <div class="tdesc">Development and maintenance of a web application using Laravel and React. REST API integration, Git/Gitflow, code review, technical documentation and Agile methodology.</div>
+      </div>
+    </div>
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">Jun 2024 – Sep 2025</div>
+        <div class="trole">Production Operator</div>
+        <div class="tcompany">WAGO · Nestlé Nespresso · Nestlé Cailler · Switzerland 🇨🇭</div>
+        <div class="tdesc">Automated line operation, quality control, ERP systems and technical documentation in highly regulated environments.</div>
+      </div>
+    </div>
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">Oct 2023 – Mar 2024</div>
+        <div class="trole">Pharmaceutical Production Operator</div>
+        <div class="tcompany">Merck · France 🇫🇷</div>
+        <div class="tdesc">Production in sterile cleanroom, GxP batch record documentation, visual inspection and product integrity testing.</div>
+      </div>
+    </div>
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">Apr 2024 – Aug 2024</div>
+        <div class="trole">Production Operator</div>
+        <div class="tcompany">Mars Wrigley · Haguenau, France 🇫🇷</div>
+        <div class="tdesc">Automated machinery, HACCP and GMP compliance, microbiological quality checks and CIP maintenance.</div>
+      </div>
+    </div>
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">Aug 2019 – Jan 2022</div>
+        <div class="trole">Production Operator</div>
+        <div class="tcompany">Cérélia · Hager · Cremo SA · France / Switzerland 🇫🇷🇨🇭</div>
+        <div class="tdesc">Multi-sector industrial experience across food, electronics and dairy production. Quality control, line management and process documentation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label">Where I studied</div>
+  <div class="section-title">Edu<span>cation</span></div>
+  <div class="divider"></div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div>
+        <div class="edu-title">Higher Technician in Web Application Development</div>
+        <div class="edu-school">MEDAC, Spain 🇪🇸</div>
+      </div>
+      <div class="edu-year">2022 – 2025<br>Degree awarded</div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-title">Licence Informatique & Mathématiques (unfinished)</div>
+        <div class="edu-school">Université de Strasbourg, France 🇫🇷</div>
+      </div>
+      <div class="edu-year">2022 – 2023</div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-title">Computer Engineering (unfinished)</div>
+        <div class="edu-school">Universidad de las Islas Baleares, Spain 🇪🇸</div>
+      </div>
+      <div class="edu-year">2020 – 2022</div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-title">Scientific Baccalaureate</div>
+        <div class="edu-school">Spain 🇪🇸</div>
+      </div>
+      <div class="edu-year">2018 – 2020</div>
+    </div>
+  </div>
+</section>
+
+<section id="languages">
+  <div class="section-label">How I communicate</div>
+  <div class="section-title">Lan<span>guages</span></div>
+  <div class="divider"></div>
+  <div class="lang-grid">
+    <div class="lang-card">
+      <div class="lang-flag">🇪🇸</div>
+      <div class="lang-name">Spanish</div>
+      <div class="lang-level">Native</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇲🇦</div>
+      <div class="lang-name">Arabic</div>
+      <div class="lang-level">Bilingual</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇫🇷</div>
+      <div class="lang-name">French</div>
+      <div class="lang-level">Advanced</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🇬🇧</div>
+      <div class="lang-name">English</div>
+      <div class="lang-level">Advanced</div>
+    </div>
+    <div class="lang-card">
+      <div class="lang-flag">🏴󠁥󠁳󠁣󠁴󠁿</div>
+      <div class="lang-name">Catalan</div>
+      <div class="lang-level">Intermediate</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="section-title">Pro<span>jects</span></div>
+  <div class="divider"></div>
+  <div class="projects-grid">
+    <a href="https://github.com/tarikzk/taskmanager" target="_blank" class="project-card">
+      <div class="project-arrow">↗</div>
+      <h3>Task Manager API</h3>
+      <p>REST API for task management with full CRUD operations connected to MySQL database.</p>
+      <div class="ptags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">MySQL</span><span class="ptag">Maven</span></div>
+    </a>
+    <a href="https://github.com/tarikzk/taskmanager-frontend" target="_blank" class="project-card">
+      <div class="project-arrow">↗</div>
+      <h3>Task Manager Frontend</h3>
+      <p>Angular frontend connected to Spring Boot backend with complete task management interface.</p>
+      <div class="ptags"><span class="ptag">Angular</span><span class="ptag">TypeScript</span><span class="ptag">REST API</span></div>
+    </a>
+    <a href="https://github.com/tarikzk/BigoSoft" target="_blank" class="project-card">
+      <div class="project-arrow">↗</div>
+      <h3>BigoSoft</h3>
+      <p>Web project developed during FP DAW studies.</p>
+      <div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+    </a>
+    <a href="https://github.com/tarikzk/Trabajo-LM" target="_blank" class="project-card">
+      <div class="project-arrow">↗</div>
+      <h3>Trabajo LM</h3>
+      <p>Web project developed during FP DAW studies.</p>
+      <div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Let's talk</div>
+  <div class="section-title">Get in <span>Touch</span></div>
+  <div class="divider"></div>
+  <div class="contact-wrapper">
+    <div>
+      <p class="contact-text">I'm currently open to new opportunities worldwide. Whether you have a question, a project or just want to say hi — feel free to reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:tarik.zaanani@gmail.com" class="contact-link">
+          <div class="contact-icon">✉</div>tarik.zaanani@gmail.com
+        </a>
+        <a href="tel:+33766594419" class="contact-link">
+          <div class="contact-icon">📞</div>+33 7 66 59 44 19
+        </a>
+        <a href="https://linkedin.com/in/tarik-zaanani-karzazi-511293227" target="_blank" class="contact-link">
+          <div class="contact-icon">in</div>LinkedIn Profile
+        </a>
+        <a href="https://github.com/tarikzk" target="_blank" class="contact-link">
+          <div class="contact-icon">⌥</div>GitHub Profile
+        </a>
+      </div>
+    </div>
+    <div class="availability">
+      <div class="avail-title">Current Status</div>
+      <div class="avail-item"><div class="avail-dot"></div>Available immediately</div>
+      <div class="avail-item"><div class="avail-dot"></div>Open to relocation worldwide</div>
+      <div class="avail-item"><div class="avail-dot"></div>Full-time · On-site or hybrid</div>
+      <div class="avail-item"><div class="avail-dot"></div>Driving licence B · Own car</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Tarik Zaanani Karzazi · Built with HTML & CSS · Open to opportunities worldwide</p>
+</footer>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+for(let i = 0; i < 80; i++){
+  particles.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    size: Math.random() * 1.5 + 0.5,
+    opacity: Math.random() * 0.4 + 0.1
+  });
+}
+
+function animate(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if(p.x < 0) p.x = canvas.width;
+    if(p.x > canvas.width) p.x = 0;
+    if(p.y < 0) p.y = canvas.height;
+    if(p.y > canvas.height) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(59,130,246,${p.opacity})`;
+    ctx.fill();
+  });
+  particles.forEach((p, i) => {
+    particles.slice(i+1).forEach(p2 => {
+      const dx = p.x - p2.x;
+      const dy = p.y - p2.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 100){
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(59,130,246,${0.1 * (1 - dist/100)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
 </html>
