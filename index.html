@@ -1,114 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tarik Zaanani Karzazi</title>
+<title>Tarik Zaanani Karzazi — Technicien Support IT</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#050810;--bg2:#0a0f1e;--bg3:#0f1628;--blue:#2563eb;--blue2:#3b82f6;--blue3:#93c5fd;--text:#e2e8f0;--muted:#64748b;--border:#1e2d4a}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
 #canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,16,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,99,235,0.15)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,16,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,99,235,.15)}
 .nav-logo{font-size:1.2rem;font-weight:700;color:var(--blue2);letter-spacing:2px}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;transition:color .3s}
 .nav-links a:hover{color:var(--blue3)}
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 2rem;position:relative;z-index:1}
 .hero-inner{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center;max-width:1000px;width:100%}
-.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);color:var(--blue3);padding:0.5rem 1.25rem;border-radius:50px;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.3);color:var(--blue3);padding:.5rem 1.25rem;border-radius:50px;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2rem}
 .dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.05;margin-bottom:1rem;letter-spacing:-1px}
 .hero h1 .last{color:var(--blue2)}
-.hero-role{font-size:1.1rem;color:var(--muted);margin-bottom:2.5rem;letter-spacing:0.5px}
+.hero-role{font-size:1.1rem;color:var(--muted);margin-bottom:2.5rem;letter-spacing:.5px}
 .hero-role span{color:var(--blue3)}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{padding:0.85rem 2rem;border-radius:8px;font-size:0.95rem;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;letter-spacing:0.5px}
+.btn{padding:.85rem 2rem;border-radius:8px;font-size:.95rem;text-decoration:none;transition:all .3s;cursor:pointer;border:none;letter-spacing:.5px}
 .btn-primary{background:var(--blue);color:white}
-.btn-primary:hover{background:var(--blue2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,99,235,0.3)}
-.btn-outline{background:transparent;color:var(--blue3);border:1px solid rgba(37,99,235,0.4)}
+.btn-primary:hover{background:var(--blue2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,99,235,.3)}
+.btn-outline{background:transparent;color:var(--blue3);border:1px solid rgba(37,99,235,.4)}
 .btn-outline:hover{border-color:var(--blue2);transform:translateY(-3px)}
 .hero-photo-wrap{position:relative;flex-shrink:0}
 .hero-photo-wrap::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:linear-gradient(135deg,var(--blue),transparent,var(--blue3));z-index:0}
 .hero-photo{width:220px;height:220px;border-radius:50%;object-fit:cover;position:relative;z-index:1;border:3px solid var(--bg)}
 section{position:relative;z-index:1;padding:6rem 2rem;max-width:1000px;margin:0 auto}
-.section-label{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem}
-.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:0.5rem}
+.section-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:.5rem}
 .section-title span{color:var(--blue2)}
 .divider{width:60px;height:3px;background:linear-gradient(90deg,var(--blue),transparent);margin-bottom:3rem;border-radius:2px}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center}
 .about-text{color:#94a3b8;line-height:1.9;font-size:1.02rem}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center}
-.stat-num{font-size:2rem;font-weight:700;color:var(--blue2);display:block}
-.stat-label{font-size:0.82rem;color:var(--muted);margin-top:0.25rem}
+.stat-num{font-size:1.8rem;font-weight:700;color:var(--blue2);display:block}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.25rem}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
-.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all 0.3s}
-.skill-card:hover{border-color:rgba(37,99,235,0.5);transform:translateY(-4px)}
-.skill-icon{font-size:1.5rem;margin-bottom:0.75rem}
-.skill-card h3{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue3);margin-bottom:1rem}
-.tags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.tag{background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);color:var(--blue3);padding:0.25rem 0.7rem;border-radius:50px;font-size:0.78rem}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all .3s}
+.skill-card:hover{border-color:rgba(37,99,235,.5);transform:translateY(-4px)}
+.skill-icon{font-size:1.5rem;margin-bottom:.75rem}
+.skill-card h3{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue3);margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);color:var(--blue3);padding:.25rem .7rem;border-radius:50px;font-size:.78rem}
 .timeline{position:relative;padding-left:2rem}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--blue),transparent)}
 .titem{position:relative;padding-bottom:2rem}
 .titem::before{content:'';position:absolute;left:-2.4rem;top:5px;width:10px;height:10px;background:var(--blue);border-radius:50%;border:2px solid var(--bg)}
-.tcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:border-color 0.3s}
-.tcard:hover{border-color:rgba(37,99,235,0.5)}
-.tperiod{font-size:0.78rem;color:var(--blue);letter-spacing:1px;margin-bottom:0.75rem}
-.trole{font-size:1rem;font-weight:600;margin-bottom:0.2rem}
-.tcompany{color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem}
-.tdesc{color:#64748b;font-size:0.85rem;line-height:1.7}
-.co-logo{width:32px;height:32px;border-radius:6px;object-fit:contain;background:white;padding:3px;flex-shrink:0}
-.co-initials{width:32px;height:32px;border-radius:6px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:white;flex-shrink:0}
+.tcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:border-color .3s}
+.tcard:hover{border-color:rgba(37,99,235,.5)}
+.tperiod{font-size:.78rem;color:var(--blue);letter-spacing:1px;margin-bottom:.65rem}
+.trole{font-size:1rem;font-weight:600;margin-bottom:.2rem}
+.tcompany{color:var(--muted);font-size:.85rem;margin-bottom:.6rem}
+.tdesc{color:#94a3b8;font-size:.85rem;line-height:1.7}
 .edu-grid{display:grid;gap:1rem}
-.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:all 0.3s}
-.edu-card:hover{border-color:rgba(37,99,235,0.4);transform:translateX(6px)}
-.edu-left{display:flex;align-items:center;gap:1rem}
-.edu-title{font-weight:600;margin-bottom:0.2rem;font-size:0.95rem}
-.edu-school{color:var(--muted);font-size:0.85rem}
-.edu-year{color:var(--blue3);font-size:0.8rem;white-space:nowrap;text-align:right}
-.lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
-.lang-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center;transition:all 0.3s;position:relative;overflow:hidden}
-.lang-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transition:transform 0.3s}
-.lang-card:hover::before{transform:scaleX(1)}
-.lang-card:hover{transform:translateY(-4px)}
-.lang-flag{font-size:2rem;margin-bottom:0.5rem}
-.lang-name{font-weight:600;font-size:0.95rem;margin-bottom:0.25rem}
-.lang-level{color:var(--blue3);font-size:0.8rem}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.project-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-decoration:none;color:var(--text);display:block;transition:all 0.3s;position:relative;overflow:hidden}
-.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue3));transform:scaleX(0);transition:transform 0.3s}
-.project-card:hover::before{transform:scaleX(1)}
-.project-card:hover{border-color:rgba(37,99,235,0.5);transform:translateY(-6px)}
-.project-arrow{position:absolute;top:1.5rem;right:1.5rem;color:var(--muted);font-size:1.2rem;transition:all 0.3s}
-.project-card:hover .project-arrow{color:var(--blue3);transform:translate(3px,-3px)}
-.project-card h3{font-size:1rem;margin-bottom:0.6rem;margin-right:2rem}
-.project-card p{color:var(--muted);font-size:0.85rem;margin-bottom:1.25rem;line-height:1.6}
-.ptags{display:flex;flex-wrap:wrap;gap:0.4rem}
-.ptag{background:rgba(37,99,235,0.08);color:var(--blue3);padding:0.2rem 0.6rem;border-radius:4px;font-size:0.75rem}
+.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.edu-title{font-weight:600;margin-bottom:.25rem;font-size:.95rem}
+.edu-school{color:var(--muted);font-size:.85rem}
+.edu-year{color:var(--blue3);font-size:.8rem;white-space:nowrap;text-align:right}
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1rem}
+.lang-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem;text-align:center}
+.lang-flag{font-size:1.8rem;margin-bottom:.5rem}
+.lang-name{font-weight:600;font-size:.9rem;margin-bottom:.25rem}
+.lang-level{color:var(--blue3);font-size:.78rem}
 .contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 .contact-text{color:var(--muted);line-height:1.8;margin-bottom:2rem}
-.contact-links{display:flex;flex-direction:column;gap:0.75rem}
-.contact-link{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;color:var(--text);transition:all 0.3s;font-size:0.9rem}
-.contact-link:hover{border-color:rgba(37,99,235,0.5);transform:translateX(6px)}
-.contact-icon{width:38px;height:38px;background:rgba(37,99,235,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-links{display:flex;flex-direction:column;gap:.75rem}
+.contact-link{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;color:var(--text);transition:all .3s;font-size:.9rem}
+.contact-link:hover{border-color:rgba(37,99,235,.5);transform:translateX(6px)}
+.contact-icon{width:38px;height:38px;background:rgba(37,99,235,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
 .availability{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:2rem}
-.avail-title{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:1.25rem}
-.avail-item{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;font-size:0.9rem;color:#94a3b8}
+.avail-title{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:1.25rem}
+.avail-item{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;font-size:.9rem;color:#94a3b8}
 .avail-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;flex-shrink:0}
-footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;border-top:1px solid var(--border)}
+footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
 @media(max-width:768px){
-  nav{padding:1rem 1.5rem}
-  .nav-links{display:none}
-  .hero-inner{grid-template-columns:1fr;text-align:center}
-  .hero-photo-wrap{margin:0 auto}
-  .hero-cta{justify-content:center}
-  .about-grid{grid-template-columns:1fr}
-  .contact-wrapper{grid-template-columns:1fr}
-  .edu-card{flex-direction:column;align-items:flex-start}
+ nav{padding:1rem 1.5rem}.nav-links{display:none}.hero-inner{grid-template-columns:1fr;text-align:center}
+ .hero-photo-wrap{margin:0 auto}.hero-cta{justify-content:center}.about-grid{grid-template-columns:1fr}
+ .contact-wrapper{grid-template-columns:1fr}.edu-card{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -119,11 +96,11 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--mu
 <nav>
   <div class="nav-logo">TZK</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#languages">Langues</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -131,12 +108,12 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--mu
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge"><span class="dot"></span> Available · Open to relocation</div>
+      <div class="hero-badge"><span class="dot"></span> Disponible immédiatement · Suisse</div>
       <h1>Tarik Zaanani<br><span class="last">Karzazi</span></h1>
-      <p class="hero-role">Full-Stack Developer · <span>IT Technician</span> · Multilingual</p>
+      <p class="hero-role">Technicien Support IT · <span>Helpdesk · Support TPV/POS</span></p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="#projects" class="btn btn-outline">View projects</a>
+        <a href="#contact" class="btn btn-primary">Me contacter</a>
+        <a href="#experience" class="btn btn-outline">Mon expérience</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
@@ -146,150 +123,151 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--mu
 </div>
 
 <section id="about">
-  <div class="section-label">Who I am</div>
-  <div class="section-title">About <span>Me</span></div>
+  <div class="section-label">Profil</div>
+  <div class="section-title">À propos de <span>moi</span></div>
   <div class="divider"></div>
   <div class="about-grid">
-    <p class="about-text">IT technician with a Higher Technician degree in Web Application Development and hands-on experience building full-stack web applications. Over 6 years of professional experience in international industrial environments across Switzerland and France — Nestlé, Nespresso, WAGO, Merck — where I built strong problem-solving habits, technical documentation skills and the ability to thrive in multilingual teams.<br><br>Currently seeking a first IT role with immediate availability and openness to relocate worldwide.</p>
+    <p class="about-text">
+      Technicien IT titulaire d'un diplôme supérieur en développement d'applications web, avec une expérience professionnelle en <strong>développement Full-Stack</strong> et en <strong>support technique de systèmes TPV/POS</strong>.
+      <br><br>
+      Mon parcours combine la compréhension des applications web avec une expérience pratique du hardware, des systèmes d'exploitation, des périphériques, des réseaux de base et du support de clients francophones. Je recherche un poste de <strong>Technicien Support IT / Helpdesk</strong> en Suisse.
+    </p>
     <div class="about-stats">
-      <div class="stat"><span class="stat-num">6+</span><div class="stat-label">Years experience</div></div>
-      <div class="stat"><span class="stat-num">4</span><div class="stat-label">Languages</div></div>
-      <div class="stat"><span class="stat-num">2</span><div class="stat-label">Countries worked</div></div>
-      <div class="stat"><span class="stat-num">∞</span><div class="stat-label">Motivation</div></div>
+      <div class="stat"><span class="stat-num">2</span><div class="stat-label">Expériences IT principales</div></div>
+      <div class="stat"><span class="stat-num">5</span><div class="stat-label">Langues</div></div>
+      <div class="stat"><span class="stat-num">🇨🇭</span><div class="stat-label">Résident en Suisse</div></div>
+      <div class="stat"><span class="stat-num">B</span><div class="stat-label">Permis suisse</div></div>
     </div>
   </div>
 </section>
 
 <section id="skills">
-  <div class="section-label">What I know</div>
-  <div class="section-title">Technical <span>Skills</span></div>
+  <div class="section-label">Ce que je maîtrise</div>
+  <div class="section-title">Compétences <span>techniques</span></div>
   <div class="divider"></div>
   <div class="skills-grid">
     <div class="skill-card">
+      <div class="skill-icon">🛠️</div>
+      <h3>Support IT</h3>
+      <div class="tags">
+        <span class="tag">Helpdesk</span><span class="tag">Troubleshooting</span>
+        <span class="tag">Diagnostic</span><span class="tag">Support utilisateurs</span>
+        <span class="tag">Hardware / Software</span><span class="tag">Support à distance</span>
+      </div>
+    </div>
+    <div class="skill-card">
       <div class="skill-icon">🖥️</div>
-      <h3>Frontend</h3>
-      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Angular</span></div>
+      <h3>Systèmes & TPV</h3>
+      <div class="tags">
+        <span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">Android</span>
+        <span class="tag">TPV / POS</span><span class="tag">Imprimantes</span><span class="tag">Écrans tactiles</span>
+      </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">⚙️</div>
-      <h3>Backend</h3>
-      <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Node.js</span><span class="tag">REST APIs</span></div>
+      <div class="skill-icon">🌐</div>
+      <h3>Réseaux & Hardware</h3>
+      <div class="tags">
+        <span class="tag">Ethernet</span><span class="tag">Wi-Fi</span><span class="tag">Routeurs</span>
+        <span class="tag">Câblage</span><span class="tag">RAM</span><span class="tag">Cartes mères</span>
+      </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">🗄️</div>
-      <h3>Database & Tools</h3>
-      <div class="tags"><span class="tag">MySQL</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">IntelliJ</span><span class="tag">Postman</span></div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">🔧</div>
-      <h3>Other</h3>
-      <div class="tags"><span class="tag">Scrum</span><span class="tag">ERP Software</span><span class="tag">Windows</span><span class="tag">Linux</span><span class="tag">Technical Docs</span></div>
+      <div class="skill-icon">👨‍💻</div>
+      <h3>Développement Web</h3>
+      <div class="tags">
+        <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">JavaScript</span>
+        <span class="tag">ReactJS</span><span class="tag">HTML / CSS</span><span class="tag">SQL</span>
+        <span class="tag">Git / GitHub</span>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="experience">
-  <div class="section-label">What I've done</div>
-  <div class="section-title">Work <span>Experience</span></div>
+  <div class="section-label">Parcours professionnel</div>
+  <div class="section-title">Expérience <span>IT</span></div>
   <div class="divider"></div>
   <div class="timeline">
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/wago.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>WG</div>'">
-          <div><div class="trole">Production Operator — Automated Machinery</div><div class="tcompany">WAGO SA · Domdidier, Switzerland 🇨🇭</div></div>
+        <div class="tperiod">SEPTEMBRE 2025 – AVRIL 2026</div>
+        <div class="trole">Technicien Support Informatique / Technicien TPV</div>
+        <div class="tcompany">TPVLINE · Málaga, Espagne 🇪🇸</div>
+        <div class="tdesc">
+          Support technique auprès de clients en France et sur d'autres marchés francophones.
+          Installation et configuration de terminaux TPV/POS, systèmes Windows/Linux/Android,
+          diagnostic hardware/software, maintenance et remplacement de composants, dépannage d'imprimantes
+          et périphériques, diagnostic de problèmes réseau et assistance par téléphone et e-mail.
         </div>
-        <div class="tperiod">Jun – Sep 2025</div>
-        <div class="tdesc">Operation and monitoring of automated lines, parameter adjustment and fault diagnosis. Level 1 preventive maintenance, quality control and production data entry.</div>
       </div>
     </div>
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/nestle.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>NE</div>'">
-          <div><div class="trole">Production Operator</div><div class="tcompany">Nestlé – Maison Cailler · Broc, Switzerland 🇨🇭</div></div>
+        <div class="tperiod">SEPTEMBRE 2023 – AOÛT 2024</div>
+        <div class="trole">Développeur Full-Stack</div>
+        <div class="tcompany">Lynxview · Alicante, Espagne 🇪🇸</div>
+        <div class="tdesc">
+          Stage de septembre 2023 à janvier 2024, puis employé jusqu'en août 2024.
+          Développement et maintenance d'applications web pour un projet gouvernemental espagnol,
+          avec PHP/Laravel côté Backend et ReactJS côté Frontend. Correction de bugs,
+          développement de fonctionnalités et tests fonctionnels.
         </div>
-        <div class="tperiod">Mar – Jun 2025</div>
-        <div class="tdesc">Operation of One Shot machine for premium chocolate packaging. Quality control, line speed compliance and production supervision.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience-swiss">
+  <div class="section-label">Parcours complémentaire</div>
+  <div class="section-title">Expérience <span>en Suisse</span></div>
+  <div class="divider"></div>
+  <div class="timeline">
+
+    <div class="titem">
+      <div class="tcard">
+        <div class="tperiod">MAI 2026 – AOÛT 2026</div>
+        <div class="trole">Opérateur de Production</div>
+        <div class="tcompany">Nespresso SA · Romont, Suisse 🇨🇭</div>
+        <div class="tdesc">Utilisation de systèmes informatisés et d'un ERP pour le suivi de production et la traçabilité dans un environnement industriel automatisé.</div>
       </div>
     </div>
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/nespresso.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>NP</div>'">
-          <div><div class="trole">Production Operator — Automated Machinery</div><div class="tcompany">Nestlé Nespresso SA · Romont, Switzerland 🇨🇭</div></div>
-        </div>
-        <div class="tperiod">Sep 2024 – Jan 2025</div>
-        <div class="tdesc">Supervision of automated lines, stock management via ERP software. Quality checks, active participation in TPM and 5S initiatives.</div>
+        <div class="tperiod">JUIN 2025 – SEPTEMBRE 2025</div>
+        <div class="trole">Opérateur de Production</div>
+        <div class="tcompany">WAGO SA · Domdidier, Suisse 🇨🇭</div>
+        <div class="tdesc">Conduite de lignes automatisées, réglages techniques, diagnostic de problèmes machines et maintenance préventive de premier niveau.</div>
       </div>
     </div>
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/mars.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>MW</div>'">
-          <div><div class="trole">Production Operator — Automated Machinery</div><div class="tcompany">Mars Wrigley · Haguenau, France 🇫🇷</div></div>
-        </div>
-        <div class="tperiod">Apr – Aug 2024</div>
-        <div class="tdesc">Critical parameter adjustment and standardised recipe preparation. Microbiological quality checks, CIP maintenance, HACCP and GMP compliance.</div>
+        <div class="tperiod">MARS 2025 – JUIN 2025</div>
+        <div class="trole">Opérateur de Production</div>
+        <div class="tcompany">Nestlé – Maison Cailler · Broc, Suisse 🇨🇭</div>
+        <div class="tdesc">Conduite et surveillance de lignes automatisées, réglage des paramètres et contrôle qualité.</div>
       </div>
     </div>
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <div class="co-initials">LX</div>
-          <div><div class="trole">Full-Stack Developer (Internship)</div><div class="tcompany">Lynxview · Alicante, Spain 🇪🇸</div></div>
-        </div>
-        <div class="tperiod">Sep 2023 – Jan 2024</div>
-        <div class="tdesc">Full-stack development with Laravel (backend) and React (frontend), UI/UX improvements. REST API integration, Gitflow version control, Agile/Scrum environment.</div>
+        <div class="tperiod">SEPTEMBRE 2024 – JANVIER 2025</div>
+        <div class="trole">Opérateur de Production</div>
+        <div class="tcompany">Nespresso SA · Romont, Suisse 🇨🇭</div>
+        <div class="tdesc">Pilotage de lignes automatisées, suivi des flux via ERP, traçabilité, contrôle qualité et participation aux démarches TPM/5S.</div>
       </div>
     </div>
 
     <div class="titem">
       <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <div class="co-initials" style="background:#475569">IMC</div>
-          <div><div class="trole">Machine Operator — Metallurgy</div><div class="tcompany">IMC Metalur SA · Villaz-St-Pierre, Switzerland 🇨🇭</div></div>
-        </div>
-        <div class="tperiod">Jun – Aug 2023</div>
-        <div class="tdesc">Sandblasting and polishing of metal parts to precise tolerances, visual and dimensional quality control.</div>
-      </div>
-    </div>
-
-    <div class="titem">
-      <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/hager.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>HG</div>'">
-          <div><div class="trole">Injection Moulding Operator</div><div class="tcompany">Hager · Bischwiller, France 🇫🇷</div></div>
-        </div>
-        <div class="tperiod">Nov 2022 – Feb 2023</div>
-        <div class="tdesc">Operation of thermoplastic injection presses, quality control and scrap rate reduction.</div>
-      </div>
-    </div>
-
-    <div class="titem">
-      <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/cremo.ch" class="co-logo" onerror="this.outerHTML='<div class=co-initials>CR</div>'">
-          <div><div class="trole">General Operative — Food Industry</div><div class="tcompany">Cremo SA · Lucens, Switzerland 🇨🇭</div></div>
-        </div>
-        <div class="tperiod">Jul – Sep 2022</div>
-        <div class="tdesc">Cheese production, equipment cleaning and disinfection, order preparation and dispatch.</div>
-      </div>
-    </div>
-
-    <div class="titem">
-      <div class="tcard">
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-          <img src="https://logo.clearbit.com/cerelia.com" class="co-logo" onerror="this.outerHTML='<div class=co-initials>CL</div>'">
-          <div><div class="trole">Food Production Operator</div><div class="tcompany">Cérélia SA · Hoerdt, France 🇫🇷</div></div>
-        </div>
-        <div class="tperiod">Aug 2019 – Jan 2022</div>
-        <div class="tdesc">Operation of automated dough mixer, regular quality checks, production flow management.</div>
+        <div class="tperiod">2022 – 2023</div>
+        <div class="trole">Expériences techniques et industrielles</div>
+        <div class="tcompany">IMC Metalur SA · Hager · Cremo SA · Suisse / France</div>
+        <div class="tdesc">Expériences en production industrielle, contrôle qualité, maintenance de premier niveau et environnement technique.</div>
       </div>
     </div>
 
@@ -297,125 +275,58 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem;color:var(--mu
 </section>
 
 <section id="education">
-  <div class="section-label">Where I studied</div>
-  <div class="section-title">Edu<span>cation</span></div>
+  <div class="section-label">Formation</div>
+  <div class="section-title">Ma <span>formation</span></div>
   <div class="divider"></div>
   <div class="edu-grid">
-
     <div class="edu-card">
-      <div class="edu-left">
-        <img src="https://logo.clearbit.com/medac.es" class="co-logo" onerror="this.outerHTML='<div class=co-initials>MD</div>'">
-        <div><div class="edu-title">Higher Technician in Web Application Development</div><div class="edu-school">MEDAC, Spain 🇪🇸</div></div>
+      <div>
+        <div class="edu-title">Technicien Supérieur en Développement d'Applications Web (DAW)</div>
+        <div class="edu-school">Diplôme obtenu en Espagne</div>
       </div>
-      <div class="edu-year">2022 – 2025<br>Degree awarded</div>
+      <div class="edu-year">Niveau<br>Bac+2 / HES</div>
     </div>
-
-    <div class="edu-card">
-      <div class="edu-left">
-        <img src="https://logo.clearbit.com/unistra.fr" class="co-logo" onerror="this.outerHTML='<div class=co-initials>US</div>'">
-        <div><div class="edu-title">Licence Informatique & Mathématiques (unfinished)</div><div class="edu-school">Université de Strasbourg, France 🇫🇷</div></div>
-      </div>
-      <div class="edu-year">2022 – 2023</div>
-    </div>
-
-    <div class="edu-card">
-      <div class="edu-left">
-        <img src="https://logo.clearbit.com/uib.es" class="co-logo" onerror="this.outerHTML='<div class=co-initials>UIB</div>'">
-        <div><div class="edu-title">Computer Engineering (unfinished)</div><div class="edu-school">Universidad de las Islas Baleares, Spain 🇪🇸</div></div>
-      </div>
-      <div class="edu-year">2020 – 2022</div>
-    </div>
-
-    <div class="edu-card">
-      <div class="edu-left">
-        <div class="co-initials" style="background:#475569">BAC</div>
-        <div><div class="edu-title">Scientific Baccalaureate</div><div class="edu-school">Spain 🇪🇸</div></div>
-      </div>
-      <div class="edu-year">2018 – 2020</div>
-    </div>
-
   </div>
 </section>
 
 <section id="languages">
-  <div class="section-label">How I communicate</div>
-  <div class="section-title">Lan<span>guages</span></div>
+  <div class="section-label">Communication</div>
+  <div class="section-title">Mes <span>langues</span></div>
   <div class="divider"></div>
   <div class="lang-grid">
-    <div class="lang-card"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-level">Native</div></div>
-    <div class="lang-card"><div class="lang-flag">🇲🇦</div><div class="lang-name">Arabic</div><div class="lang-level">Bilingual</div></div>
-    <div class="lang-card"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-level">Advanced</div></div>
-    <div class="lang-card"><div class="lang-flag">🇬🇧</div><div class="lang-name">English</div><div class="lang-level">Advanced</div></div>
-    <div class="lang-card"><div class="lang-flag">🏴󠁥󠁳󠁣󠁴󠁿</div><div class="lang-name">Catalan</div><div class="lang-level">Intermediate</div></div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-label">What I've built</div>
-  <div class="section-title">Pro<span>jects</span></div>
-  <div class="divider"></div>
-  <div class="projects-grid">
-    <a href="https://github.com/tarikzk/taskmanager" target="_blank" class="project-card">
-      <div class="project-arrow">↗</div>
-      <h3>Task Manager API</h3>
-      <p>REST API for task management with full CRUD operations and MySQL database.</p>
-      <div class="ptags"><span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">MySQL</span></div>
-    </a>
-    <a href="https://github.com/tarikzk/taskmanager-frontend" target="_blank" class="project-card">
-      <div class="project-arrow">↗</div>
-      <h3>Task Manager Frontend</h3>
-      <p>Angular frontend connected to Spring Boot backend with complete task management interface.</p>
-      <div class="ptags"><span class="ptag">Angular</span><span class="ptag">TypeScript</span></div>
-    </a>
-    <a href="https://github.com/tarikzk/BigoSoft" target="_blank" class="project-card">
-      <div class="project-arrow">↗</div>
-      <h3>BigoSoft</h3>
-      <p>Web project developed during FP DAW studies.</p>
-      <div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
-    </a>
-    <a href="https://github.com/tarikzk/Trabajo-LM" target="_blank" class="project-card">
-      <div class="project-arrow">↗</div>
-      <h3>Trabajo LM</h3>
-      <p>Web project developed during FP DAW studies.</p>
-      <div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
-    </a>
+    <div class="lang-card"><div class="lang-flag">🇪🇸</div><div class="lang-name">Espagnol</div><div class="lang-level">Courant / langue maternelle</div></div>
+    <div class="lang-card"><div class="lang-flag">🇫🇷</div><div class="lang-name">Français</div><div class="lang-level">Courant</div></div>
+    <div class="lang-card"><div class="lang-flag">🇬🇧</div><div class="lang-name">Anglais</div><div class="lang-level">Professionnel</div></div>
+    <div class="lang-card"><div class="lang-flag">🇲🇦</div><div class="lang-name">Arabe</div><div class="lang-level">Courant</div></div>
+    <div class="lang-card"><div class="lang-flag">🏴</div><div class="lang-name">Catalan</div><div class="lang-level">Courant</div></div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="section-label">Let's talk</div>
-  <div class="section-title">Get in <span>Touch</span></div>
+  <div class="section-label">Contact</div>
+  <div class="section-title">Entrons en <span>contact</span></div>
   <div class="divider"></div>
   <div class="contact-wrapper">
     <div>
-      <p class="contact-text">I'm currently open to new opportunities worldwide. Whether you have a question, a project or just want to say hi — feel free to reach out.</p>
+      <p class="contact-text">Je suis à la recherche d'une opportunité en support IT / helpdesk en Suisse et disponible immédiatement.</p>
       <div class="contact-links">
-        <a href="mailto:tarik.zaanani@gmail.com" class="contact-link">
-          <div class="contact-icon">✉</div>tarik.zaanani@gmail.com
-        </a>
-        <a href="tel:+33766594419" class="contact-link">
-          <div class="contact-icon">📞</div>+33 7 66 59 44 19
-        </a>
-        <a href="https://linkedin.com/in/tarik-zaanani-karzazi-511293227" target="_blank" class="contact-link">
-          <div class="contact-icon">in</div>LinkedIn Profile
-        </a>
-        <a href="https://github.com/tarikzk" target="_blank" class="contact-link">
-          <div class="contact-icon">⌥</div>GitHub Profile
-        </a>
+        <a href="mailto:tarik.zaanani@gmail.com" class="contact-link"><div class="contact-icon">✉</div>tarik.zaanani@gmail.com</a>
+        <a href="tel:+33766594419" class="contact-link"><div class="contact-icon">📞</div>+33 7 66 59 44 19</a>
+        <a href="https://tarikzk.github.io" target="_blank" class="contact-link"><div class="contact-icon">🌐</div>tarikzk.github.io</a>
       </div>
     </div>
     <div class="availability">
-      <div class="avail-title">Current Status</div>
-      <div class="avail-item"><div class="avail-dot"></div>Available immediately</div>
-      <div class="avail-item"><div class="avail-dot"></div>Open to relocation worldwide</div>
-      <div class="avail-item"><div class="avail-dot"></div>Full-time · On-site or hybrid</div>
-      <div class="avail-item"><div class="avail-dot"></div>Driving licence B · Own car</div>
+      <div class="avail-title">Situation</div>
+      <div class="avail-item"><div class="avail-dot"></div>Disponible immédiatement</div>
+      <div class="avail-item"><div class="avail-dot"></div>Résident en Suisse</div>
+      <div class="avail-item"><div class="avail-dot"></div>Permis B</div>
+      <div class="avail-item"><div class="avail-dot"></div>Permis de conduire + véhicule</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Tarik Zaanani Karzazi · Built with HTML & CSS · Open to opportunities worldwide</p>
+  <p>Tarik Zaanani Karzazi · Technicien Support IT · Suisse</p>
 </footer>
 
 <script>
@@ -423,9 +334,8 @@ const canvas=document.getElementById('canvas');
 const ctx=canvas.getContext('2d');
 let particles=[];
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-resize();
-window.addEventListener('resize',resize);
-for(let i=0;i<80;i++){particles.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,size:Math.random()*1.5+0.5,opacity:Math.random()*0.4+0.1})}
+resize(); window.addEventListener('resize',resize);
+for(let i=0;i<80;i++){particles.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*1.5+.5,opacity:Math.random()*.4+.1})}
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
@@ -438,7 +348,7 @@ function animate(){
   particles.forEach((p,i)=>{
     particles.slice(i+1).forEach(p2=>{
       const dx=p.x-p2.x,dy=p.y-p2.y,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(59,130,246,${0.1*(1-dist/100)})`;ctx.lineWidth=0.5;ctx.stroke()}
+      if(dist<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(59,130,246,${.1*(1-dist/100)})`;ctx.lineWidth=.5;ctx.stroke()}
     });
   });
   requestAnimationFrame(animate);
@@ -447,3 +357,4 @@ animate();
 </script>
 </body>
 </html>
+
